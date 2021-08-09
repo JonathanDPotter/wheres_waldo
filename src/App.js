@@ -1,9 +1,29 @@
-import './App.css';
+import "./App.scss";
+import Header from "./components/Header/Header";
+import Sidebar from "./components/Sidebar/Sidebar";
+import Picture from "./components/Picture/Picture";
+import ChooseScreen from "./components/ChooseScreen/ChooseScreen";
+import WinScreen from "./components/WinScreen/WinScreen";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <h1>App</h1>
+      <Header />
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <ChooseScreen />
+          </Route>
+          <Route path="/game">
+            <Picture />
+            <Sidebar />
+          </Route>
+          <Route path="/winscreen">
+            <WinScreen />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
