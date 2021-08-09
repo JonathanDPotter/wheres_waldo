@@ -1,6 +1,6 @@
 import "./App.scss";
 import Header from "./components/Header/Header";
-import Sidebar from "./components/Sidebar/Sidebar";
+import Sidebar from "./components/Footer/Footer";
 import Picture from "./components/Picture/Picture";
 import ChooseScreen from "./components/ChooseScreen/ChooseScreen";
 import WinScreen from "./components/WinScreen/WinScreen";
