@@ -1,9 +1,9 @@
 import "./Header.scss";
 
-function Header() {
+function Header(props) {
   return (
     <div className="header">
-      <h1>header</h1>
+      <h1>{props.currentTime}</h1>
     </div>
   );
 }

@@ -4,37 +4,39 @@ import Sidebar from "./components/Footer/Footer";
 import Picture from "./components/Picture/Picture";
 import ChooseScreen from "./components/ChooseScreen/ChooseScreen";
 import WinScreen from "./components/WinScreen/WinScreen";
+import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { createStore } from "redux";
-import { Provider } from "react-redux";
 
-const initialState = {
-  highScores: [],
-  currentTime: 0,
-};
-
-function reducer(state = initialState, action) {
-  switch (action.type) {
-    case "countdown":
-      return { currentTime: state.currentTime - 1 };
-    default:
-      return state;
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      highScores: [],
+      currentTime: 0,
+    };
   }
-}
 
-let store = createStore(reducer);
+  countDown() {
+    const incrementCurrentTime = () => {
+      this.setState({ currentTime: this.state.currentTime + 1 });
+    };
 
-store.subscribe(() => console.log(store.getState()));
+    window.setInterval(() => incrementCurrentTime(), 1000);
+  }
 
-function App() {
-  return (
-    <Provider store={store}>
+  choosePic(index) {
+    console.log(index)
+    this.countDown();
+  }
+
+  render() {
+    return (
       <div className="App">
-        <Header />
+        <Header currentTime={this.state.currentTime} />
         <Router>
           <Switch>
             <Route exact path="/">
-              <ChooseScreen />
+              <ChooseScreen choosePic={(index) => this.choosePic(index)} />
             </Route>
             <Route path="/game">
               <Picture />
@@ -46,8 +48,8 @@ function App() {
           </Switch>
         </Router>
       </div>
-    </Provider>
-  );
+    );
+  }
 }
 
 export default App;

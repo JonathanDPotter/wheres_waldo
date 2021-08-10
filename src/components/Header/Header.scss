@@ -1,4 +1,9 @@
 .header {
   height: 9.5vh;
   line-height: 9.5vh;
+  display: flex;
+  justify-content: space-around;
+  .btn{
+    width: 10rem;
+  }
 }

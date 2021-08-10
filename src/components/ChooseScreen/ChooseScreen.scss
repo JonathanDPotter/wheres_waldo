@@ -1,0 +1,11 @@
+.choose-screen {
+  display: grid;
+  grid-template-columns: auto auto;
+
+  img {
+   height: 20rem;
+   display: block;
+   border: 4px solid black;
+   margin-top: 1rem;
+  }
+}
