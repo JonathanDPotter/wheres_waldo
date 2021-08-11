@@ -5,15 +5,23 @@ import Picture from "./components/Picture/Picture";
 import ChooseScreen from "./components/ChooseScreen/ChooseScreen";
 import WinScreen from "./components/WinScreen/WinScreen";
 import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+
+const initialState = {
+  highScores: [],
+  currentTime: 0,
+  choice: null,
+};
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      highScores: [],
-      currentTime: 0,
-    };
+    this.state = initialState;
   }
 
   countDown() {
@@ -24,22 +32,32 @@ class App extends Component {
     window.setInterval(() => incrementCurrentTime(), 1000);
   }
 
-  choosePic(index) {
-    console.log(index)
+  resetState() {
+    this.setState(initialState);
+  }
+
+  choosePic(choice) {
     this.countDown();
+    this.setState({ choice });
   }
 
   render() {
+    const { currentTime, choice } = this.state;
     return (
       <div className="App">
-        <Header currentTime={this.state.currentTime} />
+        <Header currentTime={currentTime} />
         <Router>
           <Switch>
             <Route exact path="/">
-              <ChooseScreen choosePic={(index) => this.choosePic(index)} />
+              <ChooseScreen
+                choosePic={(index) => {
+                  this.choosePic(index);
+                }}
+              />
+              {choice !== null ? <Redirect to="/game" /> : null}
             </Route>
             <Route path="/game">
-              <Picture />
+              <Picture index={choice} />
               <Sidebar />
             </Route>
             <Route path="/winscreen">
