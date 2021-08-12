@@ -1,9 +1,11 @@
 import "./Footer.scss";
+import HomeButton from "./HomeButton";
 
-function Footer() {
+function Footer(props) {
+  const { goHome } = props;
   return (
     <div className="footer">
-      <h1>footer</h1>
+      <HomeButton goHome={goHome}/>
     </div>
   );
 }

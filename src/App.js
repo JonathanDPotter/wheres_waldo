@@ -1,6 +1,6 @@
 import "./App.scss";
 import Header from "./components/Header/Header";
-import Sidebar from "./components/Footer/Footer";
+import Footer from "./components/Footer/Footer";
 import Picture from "./components/Picture/Picture";
 import ChooseScreen from "./components/ChooseScreen/ChooseScreen";
 import WinScreen from "./components/WinScreen/WinScreen";
@@ -16,6 +16,7 @@ const initialState = {
   highScores: [],
   currentTime: 0,
   choice: null,
+  timer: null,
 };
 
 class App extends Component {
@@ -23,13 +24,12 @@ class App extends Component {
     super(props);
     this.state = initialState;
   }
+  incrementCurrentTime() {
+    this.setState({ currentTime: this.state.currentTime + 1 });
+  }
 
   countDown() {
-    const incrementCurrentTime = () => {
-      this.setState({ currentTime: this.state.currentTime + 1 });
-    };
-
-    window.setInterval(() => incrementCurrentTime(), 1000);
+    this.setState({ timer: setInterval(() => this.incrementCurrentTime(), 1000) });
   }
 
   resetState() {
@@ -39,6 +39,11 @@ class App extends Component {
   choosePic(choice) {
     this.countDown();
     this.setState({ choice });
+  }
+
+  goHome() {
+    clearInterval(this.state.timer);
+    this.resetState();
   }
 
   render() {
@@ -58,7 +63,8 @@ class App extends Component {
             </Route>
             <Route path="/game">
               <Picture index={choice} />
-              <Sidebar />
+              <Footer goHome={() => this.goHome()} />
+              {choice === null ? <Redirect to="/" /> : null}
             </Route>
             <Route path="/winscreen">
               <WinScreen />
