@@ -4,6 +4,11 @@ import Footer from "./components/Footer/Footer";
 import Picture from "./components/Picture/Picture";
 import ChooseScreen from "./components/ChooseScreen/ChooseScreen";
 import WinScreen from "./components/WinScreen/WinScreen";
+import scene1 from "./pictures/scene1.jpg";
+import scene2 from "./pictures/scene2.jpg";
+import scene3 from "./pictures/scene3.jpg";
+import scene4 from "./pictures/scene4.jpg";
+
 import React, { Component } from "react";
 import {
   BrowserRouter as Router,
@@ -17,6 +22,7 @@ const initialState = {
   currentTime: 0,
   choice: null,
   timer: null,
+  pictures: [scene1, scene2, scene3, scene4],
 };
 
 class App extends Component {
@@ -47,7 +53,7 @@ class App extends Component {
   }
 
   render() {
-    const { currentTime, choice } = this.state;
+    const { currentTime, choice, pictures } = this.state;
     return (
       <div className="App">
         <Header currentTime={currentTime} choice={choice}/>
@@ -55,6 +61,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/">
               <ChooseScreen
+                pictures={pictures}
                 choosePic={(index) => {
                   this.choosePic(index);
                 }}
@@ -62,7 +69,7 @@ class App extends Component {
               {choice !== null ? <Redirect to="/game" /> : null}
             </Route>
             <Route path="/game">
-              <Picture index={choice} />
+              <Picture index={choice} pictures={pictures} />
               <Footer goHome={() => this.goHome()} />
               {choice === null ? <Redirect to="/" /> : null}
             </Route>

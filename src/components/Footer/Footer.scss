@@ -1,4 +1,14 @@
 .footer {
   height: 9.5vh;
   line-height: 9.5vh;
+  display: flex;
+  justify-content: space-around;
+
+  .character-list {
+    display: flex;
+
+    .character {
+      margin: auto 1rem;
+    }
+  }
 }
