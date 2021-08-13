@@ -5,8 +5,12 @@ function Header(props) {
   const { currentTime, choice } = props;
   return (
     <div className="header">
-      <h1 className="title">Where are They?</h1>
-      {choice !== null ? <Timer currentTime={currentTime} /> : null}
+      <div className="container">
+        <h1 className="title">Where's Waldo?</h1>
+        {choice !== null ? (
+          <Timer currentTime={currentTime} className="timer" />
+        ) : null}
+      </div>
     </div>
   );
 }

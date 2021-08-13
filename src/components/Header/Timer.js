@@ -19,7 +19,7 @@ function Timer(props) {
 
   return (
     <div className="header">
-      <h1>Time: {displayTime}</h1>
+      <h2>Time: {displayTime}</h2>
     </div>
   );
 }

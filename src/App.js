@@ -4,11 +4,7 @@ import Footer from "./components/Footer/Footer";
 import Picture from "./components/Picture/Picture";
 import ChooseScreen from "./components/ChooseScreen/ChooseScreen";
 import WinScreen from "./components/WinScreen/WinScreen";
-import scene1 from "./pictures/scene1.jpg";
-import scene2 from "./pictures/scene2.jpg";
-import scene3 from "./pictures/scene3.jpg";
-import scene4 from "./pictures/scene4.jpg";
-
+import {pictures} from "./pictureArrays.js"
 import React, { Component } from "react";
 import {
   BrowserRouter as Router,
@@ -22,7 +18,6 @@ const initialState = {
   currentTime: 0,
   choice: null,
   timer: null,
-  pictures: [scene1, scene2, scene3, scene4],
 };
 
 class App extends Component {
@@ -35,7 +30,9 @@ class App extends Component {
   }
 
   countDown() {
-    this.setState({ timer: setInterval(() => this.incrementCurrentTime(), 1000) });
+    this.setState({
+      timer: setInterval(() => this.incrementCurrentTime(), 1000),
+    });
   }
 
   resetState() {
@@ -53,10 +50,10 @@ class App extends Component {
   }
 
   render() {
-    const { currentTime, choice, pictures } = this.state;
+    const { currentTime, choice} = this.state;
     return (
       <div className="App">
-        <Header currentTime={currentTime} choice={choice}/>
+        <Header currentTime={currentTime} choice={choice} />
         <Router>
           <Switch>
             <Route exact path="/">
@@ -69,8 +66,11 @@ class App extends Component {
               {choice !== null ? <Redirect to="/game" /> : null}
             </Route>
             <Route path="/game">
-              <Picture index={choice} pictures={pictures} />
-              <Footer goHome={() => this.goHome()} />
+              <Picture index={choice} />
+              <Footer
+                goHome={() => this.goHome()}
+                index={choice}
+              />
               {choice === null ? <Redirect to="/" /> : null}
             </Route>
             <Route path="/winscreen">

@@ -1,13 +1,15 @@
 import "./Footer.scss";
 import HomeButton from "./HomeButton";
-// import CharactersToFind from "./CharactersToFind";
+import CharactersToFind from "./CharactersToFind";
 
 function Footer(props) {
-  const { goHome } = props;
+  const { goHome, characters, index } = props;
   return (
     <div className="footer">
-      {/* <CharactersToFind /> */}
-      <HomeButton goHome={goHome}/>
+      <div className="container">
+        <CharactersToFind characters={characters} index={index} />
+        <HomeButton goHome={goHome} />
+      </div>
     </div>
   );
 }
