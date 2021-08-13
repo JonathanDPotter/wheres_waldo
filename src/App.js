@@ -50,7 +50,7 @@ class App extends Component {
     const { currentTime, choice } = this.state;
     return (
       <div className="App">
-        <Header currentTime={currentTime} />
+        <Header currentTime={currentTime} choice={choice}/>
         <Router>
           <Switch>
             <Route exact path="/">
