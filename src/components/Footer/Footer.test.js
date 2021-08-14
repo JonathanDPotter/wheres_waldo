@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 
 test("footer renders without crashing", () => {
   const div = document.createElement("div");
-  ReactDOM.render(<Footer />, div);
+  ReactDOM.render(<Footer characters={[1, 2, 3, 4]} index={0} found={[1] }/>, div);
 });
 
 test("Home button renders without crashing", () => {

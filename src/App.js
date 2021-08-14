@@ -4,7 +4,7 @@ import Footer from "./components/Footer/Footer";
 import Picture from "./components/Picture/Picture";
 import ChooseScreen from "./components/ChooseScreen/ChooseScreen";
 import WinScreen from "./components/WinScreen/WinScreen";
-import {pictures} from "./pictureArrays.js"
+import { pictures } from "./pictureArrays.js";
 import React, { Component } from "react";
 import {
   BrowserRouter as Router,
@@ -18,6 +18,7 @@ const initialState = {
   currentTime: 0,
   choice: null,
   timer: null,
+  found: [],
 };
 
 class App extends Component {
@@ -49,8 +50,12 @@ class App extends Component {
     this.resetState();
   }
 
+  foundCharacter(foundOne) {
+    this.setState({ found: [...this.state.found, foundOne] });
+  }
+
   render() {
-    const { currentTime, choice} = this.state;
+    const { currentTime, choice, found } = this.state;
     return (
       <div className="App">
         <Header currentTime={currentTime} choice={choice} />
@@ -66,10 +71,14 @@ class App extends Component {
               {choice !== null ? <Redirect to="/game" /> : null}
             </Route>
             <Route path="/game">
-              <Picture index={choice} />
+              <Picture
+                index={choice}
+                foundCharacter={(foundOne) => this.foundCharacter(foundOne)}
+              />
               <Footer
                 goHome={() => this.goHome()}
                 index={choice}
+                found={found}
               />
               {choice === null ? <Redirect to="/" /> : null}
             </Route>

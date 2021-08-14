@@ -4,15 +4,30 @@
   right: 0;
   width: 100%;
   margin-top: 91vh;
-  height: 9.5vh;
-  line-height: 9.5vh;
+  height: 10vh;
+  line-height: 10vh;
+
   .container {
     display: flex;
     justify-content: space-around;
 
-    .character {
-      height: 3rem;
-      margin: auto 1rem;
+    .characters {
+      display: flex;
+      width: 50vh;
+      justify-content: space-around;
+      align-items: center;
+
+      .character-container {
+        height: 6vh;
+        width: 30vh;
+
+        .overlay-x {
+          position: absolute;
+          top: 0;
+          left: 30;
+          font-size: 3.5rem;
+        }
+      }
     }
   }
 }

@@ -3,11 +3,11 @@ import HomeButton from "./HomeButton";
 import CharactersToFind from "./CharactersToFind";
 
 function Footer(props) {
-  const { goHome, characters, index } = props;
+  const { goHome, index, found } = props;
   return (
     <div className="footer">
       <div className="container">
-        <CharactersToFind characters={characters} index={index} />
+        <CharactersToFind index={index} found={found}/>
         <HomeButton goHome={goHome} />
       </div>
     </div>
