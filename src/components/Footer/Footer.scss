@@ -18,14 +18,20 @@
       align-items: center;
 
       .character-container {
+        display: grid;
+        grid-template-areas: div;
         height: 6vh;
-        width: 30vh;
-
+        width: min-content;
+        .character {
+          grid-area: div;
+          height: 6vh;
+        }
         .overlay-x {
-          position: absolute;
-          top: 0;
-          left: 30;
-          font-size: 3.5rem;
+          grid-area: div;
+          font-size: 6vh;
+          line-height: 6vh;
+          text-align: center;
+          color: red;
         }
       }
     }
