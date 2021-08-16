@@ -14,4 +14,4 @@ const Header = ({ currentTime, choice }) => {
   );
 };
 
-export { Header };
+export default Header;

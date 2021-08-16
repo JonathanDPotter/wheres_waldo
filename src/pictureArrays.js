@@ -19,11 +19,12 @@ import scene4Char2 from "./pictures/scene4Char2.jpg";
 import scene4Char3 from "./pictures/scene4Char3.jpg";
 import scene4Char4 from "./pictures/scene4Char4.jpg";
 
-export const pictures = [scene1, scene2, scene3, scene4];
-export const characters = [
+const pictures = [scene1, scene2, scene3, scene4];
+const characters = [
   [scene1Char1, scene1Char2, scene1Char3, scene1Char4],
   [scene2Char1, scene2Char2, scene2Char3, scene2Char4],
   [scene3Char1, scene3Char2, scene3Char3, scene3Char4],
   [scene4Char1, scene4Char2, scene4Char3, scene4Char4],
 ];
 
+export { pictures, characters };

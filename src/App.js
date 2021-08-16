@@ -1,5 +1,5 @@
 import "./App.scss";
-import { Header } from "./components/Header/Header";
+import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Picture from "./components/Picture/Picture";
 import ChooseScreen from "./components/ChooseScreen/ChooseScreen";
@@ -46,12 +46,21 @@ class App extends Component {
   }
 
   goHome() {
-    clearInterval(this.state.timer);
+    this.stopTimer();
     this.resetState();
   }
 
   foundCharacter(foundOne) {
     this.setState({ found: [...this.state.found, foundOne] });
+  }
+
+  stopTimer() {
+    console.log("clearing");
+    clearInterval(this.state.timer);
+  }
+
+  clearChoice() {
+    this.setState({ choice: null });
   }
 
   render() {
@@ -81,9 +90,10 @@ class App extends Component {
                 found={found}
               />
               {choice === null ? <Redirect to="/" /> : null}
+              {found.length === 4 ? <Redirect to="/winscreen" /> : null}
             </Route>
             <Route path="/winscreen">
-              <WinScreen />
+              <WinScreen time={currentTime} clearChoice={() => this.clearChoice() } stopTimer={() => this.stopTimer()} />
             </Route>
           </Switch>
         </Router>

@@ -4,5 +4,5 @@ import ReactDOM from "react-dom";
 
 test("win screen renders without crashing", () => {
   const div = document.createElement("div");
-  ReactDOM.render(<WinScreen />, div);
+  ReactDOM.render(<WinScreen time={4}/>, div);
 });
