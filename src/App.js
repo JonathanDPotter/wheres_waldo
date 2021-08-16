@@ -1,5 +1,5 @@
 import "./App.scss";
-import Header from "./components/Header/Header";
+import { Header } from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Picture from "./components/Picture/Picture";
 import ChooseScreen from "./components/ChooseScreen/ChooseScreen";

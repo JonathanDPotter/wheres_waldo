@@ -7,6 +7,7 @@ test("picture renders without crashing", () => {
   ReactDOM.render(
     <Picture
       pictures={[1, 2, 3, 4]}
+      index={1}
       foundCharacter={() => console.log("found")}
     />,
     div

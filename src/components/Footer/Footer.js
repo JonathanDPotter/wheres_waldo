@@ -2,8 +2,7 @@ import "./Footer.scss";
 import HomeButton from "./HomeButton";
 import CharactersToFind from "./CharactersToFind";
 
-function Footer(props) {
-  const { goHome, index, found } = props;
+const Footer = ({ goHome, index, found }) => {
   return (
     <div className="footer">
       <div className="container">
