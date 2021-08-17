@@ -17,7 +17,6 @@ const initialState = {
   highScores: [],
   currentTime: 0,
   choice: null,
-  timer: null,
   found: [],
 };
 
@@ -25,15 +24,14 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = initialState;
+    this.timer = null;
   }
   incrementCurrentTime() {
     this.setState({ currentTime: this.state.currentTime + 1 });
   }
 
   countDown() {
-    this.setState({
-      timer: setInterval(() => this.incrementCurrentTime(), 1000),
-    });
+    this.timer = setInterval(() => this.incrementCurrentTime(), 1000);
   }
 
   resetState() {
@@ -56,7 +54,7 @@ class App extends Component {
 
   stopTimer() {
     console.log("clearing");
-    clearInterval(this.state.timer);
+    clearInterval(this.timer);
   }
 
   clearChoice() {
@@ -93,7 +91,11 @@ class App extends Component {
               {found.length === 4 ? <Redirect to="/winscreen" /> : null}
             </Route>
             <Route path="/winscreen">
-              <WinScreen time={currentTime} clearChoice={() => this.clearChoice() } stopTimer={() => this.stopTimer()} />
+              <WinScreen
+                time={currentTime}
+                clearChoice={() => this.clearChoice()}
+                stopTimer={() => this.stopTimer()}
+              />
             </Route>
           </Switch>
         </Router>
