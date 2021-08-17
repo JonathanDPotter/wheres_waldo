@@ -57,10 +57,6 @@ class App extends Component {
     clearInterval(this.timer);
   }
 
-  clearChoice() {
-    this.setState({ choice: null });
-  }
-
   render() {
     const { currentTime, choice, found } = this.state;
     return (
@@ -93,9 +89,10 @@ class App extends Component {
             <Route path="/winscreen">
               <WinScreen
                 time={currentTime}
-                clearChoice={() => this.clearChoice()}
                 stopTimer={() => this.stopTimer()}
+                restart={() => this.goHome()}
               />
+              {choice === null ? <Redirect to="/" /> : null}
             </Route>
           </Switch>
         </Router>

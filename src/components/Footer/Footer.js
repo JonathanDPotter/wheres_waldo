@@ -1,5 +1,5 @@
 import "./Footer.scss";
-import HomeButton from "./HomeButton";
+import Button from "../Button/Button.js";
 import CharactersToFind from "./CharactersToFind";
 
 const Footer = ({ goHome, index, found }) => {
@@ -7,7 +7,7 @@ const Footer = ({ goHome, index, found }) => {
     <div className="footer">
       <div className="container">
         <CharactersToFind index={index} found={found}/>
-        <HomeButton goHome={goHome} />
+        <Button onClick={goHome} text="home"/>
       </div>
     </div>
   );
