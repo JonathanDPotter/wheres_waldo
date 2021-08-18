@@ -1,5 +1,5 @@
 import "./Header.scss";
-import Timer from "./Timer.js";
+import Timer from "../Timer/Timer.js";
 
 const Header = ({ currentTime, choice }) => {
   return (

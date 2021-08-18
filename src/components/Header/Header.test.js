@@ -1,5 +1,5 @@
 import Header from "./Header.js";
-import Timer from "./Timer.js";
+import Timer from "../Timer/Timer.js";
 import React from "react";
 import ReactDOM from "react-dom";
 import { render, screen } from '@testing-library/react';
