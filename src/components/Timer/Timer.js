@@ -1,5 +1,7 @@
+import "./Timer.scss";
+
 function Timer(props) {
-  const { currentTime } = props;
+  const { currentTime, showTime, message } = props;
 
   // get seconds elapsed from state and format it as minutes:seconds
 
@@ -17,9 +19,12 @@ function Timer(props) {
 
   let displayTime = `${minutes}:${seconds}`;
 
+  // see if timer should display (only on /game route)
+  let show;
+  showTime === true ? (show = "timer") : (show = "hidden");
   return (
-    <div className="header">
-      <h2>Time: {displayTime}</h2>
+    <div className={show}>
+      <h2>{message}: {displayTime}</h2>
     </div>
   );
 }

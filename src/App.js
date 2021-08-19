@@ -61,7 +61,10 @@ class App extends Component {
     const { currentTime, choice, found } = this.state;
     return (
       <div className="App">
-        <Header currentTime={currentTime} choice={choice} />
+        <Header
+          currentTime={currentTime}
+          showTime={window.location.pathname === "/game"}
+        />
         <Router>
           <Switch>
             <Route exact path="/">

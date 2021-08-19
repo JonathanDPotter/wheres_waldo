@@ -11,7 +11,9 @@ const WinScreen = ({ time, stopTimer, restart }) => {
   return (
     <div className="win-screen">
       <PopUp currentTime={time} />
-      <Button text="Play again!" onClick={restart} />
+      <div className="container">
+        <Button text="Play again!" onClick={restart} />
+      </div>
     </div>
   );
 };

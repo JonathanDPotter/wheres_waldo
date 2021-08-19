@@ -1,11 +1,14 @@
 .pop-up {
-  position: fixed;
-  top: 20vh;
-  left: 20vw;
-  height: 60vh;
-  width: 60vw;
+  margin: auto;
+  width: 80%;
+  height: 80vh;
+  border: 3px solid black;
+  background-color: aquamarine;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+  .btn {
+    margin-top: 10rem;
+  }
 }
