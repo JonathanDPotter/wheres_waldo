@@ -11,6 +11,8 @@ const firebaseInit = {
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
+console.log(firebase.apps.length)
+
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseInit);
 } else {

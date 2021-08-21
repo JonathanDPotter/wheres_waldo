@@ -2,7 +2,6 @@ import "./WinScreen.scss";
 import PopUp from "../PopUp/PopUp.js";
 import { useEffect } from "react";
 import Button from "../Button/Button.js";
-import db from "../../firebase.js"
 
 const WinScreen = ({
   time,
@@ -12,8 +11,8 @@ const WinScreen = ({
   handleChange,
   inputValue,
   popClose,
+  db,
 }) => {
-
   let toRender;
 
   useEffect(() => {
@@ -21,37 +20,41 @@ const WinScreen = ({
   });
 
   if (popClose !== true) {
-    toRender = <PopUp
-      currentTime={time}
-      handleSubmit={handleSubmit}
-      handleChange={handleChange}
-      inputValue={inputValue}
-    />;
+    toRender = (
+      <PopUp
+        currentTime={time}
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+        inputValue={inputValue}
+      />
+    );
   } else {
     const listItems = [];
-    db.collection("topScores").get().then((querySnapshot) => {
-      querySnapshot.forEach((doc, i) => {
-        if (i <= 20) {
+
+    db.collection("topScores")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
           listItems.push(
-            <li className="top-score">{i}: {doc.player} {doc.time}</li>
-          )
-        }
-      })
-    })
-    toRender = <div className="container">
-      <h1 className="score-title">Top Scores</h1>
-      <ul className="top-scores-list">
-        {listItems}
-      </ul>
+            <li className="top-score">
+              {doc.data()} {doc.time}
+            </li>
+          );
+        });
+      });
+
+    toRender = (
+      <div className="container">
+        <h1 className="score-title">Top Scores</h1>
+        <ul className="top-scores-list">{listItems}</ul>
         <Button text="Play again!" onClick={restart} />
       </div>
+    );
+
+    console.log(listItems);
   }
 
-  return (
-    <div className="win-screen">
-      {toRender}
-    </div>
-  );
+  return <div className="win-screen">{toRender}</div>;
 };
 
 export default WinScreen;

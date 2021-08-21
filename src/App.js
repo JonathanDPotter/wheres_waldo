@@ -140,6 +140,7 @@ class App extends Component {
                 handleChange={(event) => this.handleChange(event)}
                 inputValue={inputValue}
                 popClose={popClose}
+                db={db}
               />
               {choice === null ? <Redirect to="/" /> : null}
             </Route>
