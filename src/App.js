@@ -6,6 +6,10 @@ import ChooseScreen from "./components/ChooseScreen/ChooseScreen";
 import WinScreen from "./components/WinScreen/WinScreen";
 import { pictures } from "./pictureArrays.js";
 import React, { Component } from "react";
+// import db from "./firebase.js";
+import firebase from 'firebase';
+import 'firebase/firestore'
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,11 +17,29 @@ import {
   Redirect,
 } from "react-router-dom";
 
+
+
+
+firebase.initializeApp({
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
+});
+
+const db = firebase.firestore();
+
+
 const initialState = {
   highScores: [],
   currentTime: 0,
   choice: null,
   found: [],
+  inputValue: "",
+  popClose: false,
 };
 
 class App extends Component {
@@ -53,12 +75,32 @@ class App extends Component {
   }
 
   stopTimer() {
-    console.log("clearing");
     clearInterval(this.timer);
+  }
+  handleSubmit(event) {
+    event.preventDefault();
+
+    db.collection("topScores")
+      .add({
+        player: this.state.inputValue,
+        time: this.state.currentTime,
+      })
+      .then((docRef) => {
+        console.log("Document written with ID: ", docRef.id);
+      })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      });
+    this.setState({ popClose: true });
+    
+  }
+
+  handleChange(event) {
+    this.setState({ inputValue: event.target.value });
   }
 
   render() {
-    const { currentTime, choice, found } = this.state;
+    const { currentTime, choice, found, inputValue, popClose } = this.state;
     return (
       <div className="App">
         <Header
@@ -94,6 +136,10 @@ class App extends Component {
                 time={currentTime}
                 stopTimer={() => this.stopTimer()}
                 restart={() => this.goHome()}
+                handleSubmit={(event) => this.handleSubmit(event)}
+                handleChange={(event) => this.handleChange(event)}
+                inputValue={inputValue}
+                popClose={popClose}
               />
               {choice === null ? <Redirect to="/" /> : null}
             </Route>

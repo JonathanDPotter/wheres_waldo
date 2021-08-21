@@ -1,14 +1,30 @@
-import Timer from "../Timer/Timer.js"
-import Button from "../Button/Button.js"
-import "./PopUp.scss"
+import Timer from "../Timer/Timer.js";
+import "./PopUp.scss";
 
-const PopUp = ({ currentTime }) => {
+const PopUp = ({
+  currentTime,
+  handleSubmit,
+  handleChange,
+  inputValue,
+}) => {
   return (
     <div className="pop-up">
       <Timer message="Your Time" currentTime={currentTime} />
-      <Button onClick={() => console.log("click")} text="Submit"/>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="player">
+          Player Name:
+          <input
+            type="text"
+            name="player"
+            id="player-input"
+            onChange={handleChange}
+            value={inputValue}
+          />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
     </div>
-  )
-}
+  );
+};
 
-export default PopUp
+export default PopUp;
