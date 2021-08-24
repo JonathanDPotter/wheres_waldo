@@ -24,7 +24,7 @@ function Timer(props) {
   showTime === true ? (show = "timer") : (show = "hidden");
   return (
     <div className={show}>
-      <h2>{message}: {displayTime}</h2>
+      <p>{message}: {displayTime}</p>
     </div>
   );
 }

@@ -7,8 +7,8 @@ import WinScreen from "./components/WinScreen/WinScreen";
 import { pictures } from "./pictureArrays.js";
 import React, { Component } from "react";
 // import db from "./firebase.js";
-import firebase from 'firebase';
-import 'firebase/firestore'
+import firebase from "firebase";
+import "firebase/firestore";
 
 import {
   BrowserRouter as Router,
@@ -16,9 +16,6 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-
-
-
 
 firebase.initializeApp({
   apiKey: process.env.REACT_APP_API_KEY,
@@ -32,7 +29,6 @@ firebase.initializeApp({
 
 const db = firebase.firestore();
 
-
 const initialState = {
   highScores: [],
   currentTime: 0,
@@ -40,6 +36,7 @@ const initialState = {
   found: [],
   inputValue: "",
   popClose: false,
+  topScores: [],
 };
 
 class App extends Component {
@@ -79,6 +76,7 @@ class App extends Component {
   }
   handleSubmit(event) {
     event.preventDefault();
+    const listItems = [];
 
     db.collection("topScores")
       .add({
@@ -91,8 +89,16 @@ class App extends Component {
       .catch((error) => {
         console.error("Error adding document: ", error);
       });
-    this.setState({ popClose: true });
-    
+    db.collection("topScores")
+      .get()
+      .then((snapshot) => {
+        const documents = snapshot.docs.map((doc) => doc.data());
+        documents.forEach((doc, i) => {
+          this.setState({topScores: [...this.state.topScores, {id: doc.documentId, player: doc.player, time: doc.time}]})
+        })
+      });
+
+    this.setState({ popClose: true});
   }
 
   handleChange(event) {
@@ -100,7 +106,8 @@ class App extends Component {
   }
 
   render() {
-    const { currentTime, choice, found, inputValue, popClose } = this.state;
+    const { currentTime, choice, found, inputValue, popClose, topScores } =
+      this.state;
     return (
       <div className="App">
         <Header
@@ -140,7 +147,7 @@ class App extends Component {
                 handleChange={(event) => this.handleChange(event)}
                 inputValue={inputValue}
                 popClose={popClose}
-                db={db}
+                topScores={topScores}
               />
               {choice === null ? <Redirect to="/" /> : null}
             </Route>

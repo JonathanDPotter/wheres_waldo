@@ -46,13 +46,6 @@ const Picture = ({ index, foundCharacter }) => {
         alt="cast of characters"
         style={{ width: picWidth }}
         useMap="#characters-map"
-        onClick={(event) => {
-          const { target, clientX, clientY } = event;
-          const div = target.getBoundingClientRect();
-          const x = clientX - div.left;
-          const y = clientY - div.top;
-          console.log(x, y);
-        }}
       />
       <map name="characters-map">
         <area

@@ -2,6 +2,7 @@ import "./WinScreen.scss";
 import PopUp from "../PopUp/PopUp.js";
 import { useEffect } from "react";
 import Button from "../Button/Button.js";
+import Timer from "../Timer/Timer.js";
 
 const WinScreen = ({
   time,
@@ -11,7 +12,7 @@ const WinScreen = ({
   handleChange,
   inputValue,
   popClose,
-  db,
+  topScores,
 }) => {
   let toRender;
 
@@ -29,20 +30,19 @@ const WinScreen = ({
       />
     );
   } else {
-    const listItems = [];
-
-    db.collection("topScores")
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          listItems.push(
-            <li className="top-score">
-              {doc.data()} {doc.time}
-            </li>
-          );
-        });
-      });
-
+    const sortedScores = topScores.sort((a, b) => {
+      return a.time - b.time;
+    });
+    const listItems = sortedScores.map((score, i) => {
+      if (i < 20) {
+        return (
+          <li className="score" key={score.id}>
+            {parseInt(i) + 1}. {score.player}{" "}
+            <Timer message="Time" currentTime={score.time} className="topscore-timer"></Timer>
+          </li>
+        );
+      }
+    });
     toRender = (
       <div className="container">
         <h1 className="score-title">Top Scores</h1>
@@ -50,8 +50,6 @@ const WinScreen = ({
         <Button text="Play again!" onClick={restart} />
       </div>
     );
-
-    console.log(listItems);
   }
 
   return <div className="win-screen">{toRender}</div>;
