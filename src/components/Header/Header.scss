@@ -1,17 +1,38 @@
 .header {
   position: fixed;
   top: 0;
-  height: 9.5vh;
-  line-height: 9.5vh;
+  height: 10vh;
+  line-height: 10vh;
   width: 100%;
+  background-color: #bbd5f8;
+  color: #122b44;
+
   .container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    display: grid;
     width: 100%;
+    grid-template-areas: "left center right";
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
 
     .hidden {
       display: none;
+    }
+
+    .title {
+      grid-area: center;
+    }
+
+    .time-box {
+      grid-area: right;
+      width: 15vw;
+      height: 8vh;
+      line-height: 8vh;
+      margin: auto;
+      background-color: #122b44;
+      color: #b5cffa;
+      border: 3px solid #669df6;
+      border-radius: 10px;
+      font-size: 1rem;
     }
   }
 }

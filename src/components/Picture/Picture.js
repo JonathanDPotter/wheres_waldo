@@ -28,7 +28,9 @@ const Picture = ({ index, foundCharacter }) => {
       "197, 278, 227, 340",
     ],
   ];
+
   const width = window.innerWidth;
+
   let picWidth = 1500;
 
   if (index === null) {

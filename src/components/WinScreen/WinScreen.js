@@ -38,20 +38,13 @@ const WinScreen = ({
       if (i < 10) {
         return (
           <li
-            className="score"
-            key={score.id}
-            style={
-              currentScoreId === score.id
-                ? { color: "red" }
-                : { color: "black" }
+            className={
+              currentScoreId === score.id ? "score current" : "score"
             }
+            key={score.id}
           >
-            {parseInt(i) + 1}. {score.player}{" "}
-            <Timer
-              message="Time"
-              currentTime={score.time}
-              className="top-score"
-            ></Timer>
+            {score.player}{" "}
+            <Timer message="Time" currentTime={score.time}></Timer>
           </li>
         );
       }

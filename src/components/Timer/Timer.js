@@ -18,13 +18,12 @@ function Timer(props) {
   }
 
   let displayTime = `${minutes}:${seconds}`;
-
-  // see if timer should display (only on /game route)
-  let show;
-  showTime === true ? (show = "timer") : (show = "hidden");
+  
   return (
-    <div className={show}>
-      <p>{message}: {displayTime}</p>
+    <div className={showTime === true ? "timer" : "hidden"}>
+      <p>
+        {message}: {displayTime}
+      </p>
     </div>
   );
 }

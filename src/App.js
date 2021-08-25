@@ -24,6 +24,7 @@ const initialState = {
   popClose: false,
   topScores: [],
   currentScoreId: null,
+  showTime: false,
 };
 
 class App extends Component {
@@ -40,18 +41,16 @@ class App extends Component {
     this.timer = setInterval(() => this.incrementCurrentTime(), 1000);
   }
 
-  resetState() {
-    this.setState(initialState);
-  }
-
   choosePic(choice) {
     this.countDown();
+    this.toggleShowTime();
     this.setState({ choice });
   }
 
   goHome() {
     this.stopTimer();
-    this.resetState();
+    this.toggleShowTime();
+    this.setState(initialState);
   }
 
   foundCharacter(foundOne) {
@@ -59,8 +58,18 @@ class App extends Component {
   }
 
   stopTimer() {
+    if (this.state.showTime === true) {
+      this.toggleShowTime();
+    }
     clearInterval(this.timer);
   }
+
+  toggleShowTime() {
+    this.state.showTime === false
+      ? this.setState({ showTime: true })
+      : this.setState({ showTime: false });
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     const targetCollection = "topScores" + this.state.choice.toString();
@@ -109,13 +118,11 @@ class App extends Component {
       popClose,
       topScores,
       currentScoreId,
+      showTime,
     } = this.state;
     return (
       <div className="App">
-        <Header
-          currentTime={currentTime}
-          showTime={window.location.pathname === "/game"}
-        />
+        <Header currentTime={currentTime} showTime={showTime} />
         <Router>
           <Switch>
             <Route exact path="/">

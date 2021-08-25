@@ -3,9 +3,11 @@
   bottom: 0;
   right: 0;
   width: 100%;
-  margin-top: 91vh;
+  margin-top: 90vh;
   height: 10vh;
   line-height: 10vh;
+  background-color: #bbd5f8;
+  color: #122b44;
 
   .container {
     display: flex;
@@ -28,10 +30,9 @@
         }
         .overlay-x {
           grid-area: div;
-          font-size: 6vh;
-          line-height: 6vh;
+          font-size: 8vh;
+          line-height: 8vh;
           text-align: center;
-          color: red;
         }
       }
     }
