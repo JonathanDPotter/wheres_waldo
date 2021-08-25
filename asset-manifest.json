@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/jonathandpotter.github.io/wheres_waldo/static/css/main.f9cf56c5.chunk.css",
+    "main.js": "/jonathandpotter.github.io/wheres_waldo/static/js/main.3f9f8bfd.chunk.js",
+    "main.js.map": "/jonathandpotter.github.io/wheres_waldo/static/js/main.3f9f8bfd.chunk.js.map",
+    "runtime-main.js": "/jonathandpotter.github.io/wheres_waldo/static/js/runtime-main.7f02daaf.js",
+    "runtime-main.js.map": "/jonathandpotter.github.io/wheres_waldo/static/js/runtime-main.7f02daaf.js.map",
+    "static/js/2.7e80f5c4.chunk.js": "/jonathandpotter.github.io/wheres_waldo/static/js/2.7e80f5c4.chunk.js",
+    "static/js/2.7e80f5c4.chunk.js.map": "/jonathandpotter.github.io/wheres_waldo/static/js/2.7e80f5c4.chunk.js.map",
+    "index.html": "/jonathandpotter.github.io/wheres_waldo/index.html",
+    "static/css/main.f9cf56c5.chunk.css.map": "/jonathandpotter.github.io/wheres_waldo/static/css/main.f9cf56c5.chunk.css.map",
+    "static/js/2.7e80f5c4.chunk.js.LICENSE.txt": "/jonathandpotter.github.io/wheres_waldo/static/js/2.7e80f5c4.chunk.js.LICENSE.txt",
+    "static/media/scene1.dcd79bf1.jpg": "/jonathandpotter.github.io/wheres_waldo/static/media/scene1.dcd79bf1.jpg",
+    "static/media/scene2.a0e0289e.jpg": "/jonathandpotter.github.io/wheres_waldo/static/media/scene2.a0e0289e.jpg",
+    "static/media/scene3.ecd7e7bd.jpg": "/jonathandpotter.github.io/wheres_waldo/static/media/scene3.ecd7e7bd.jpg",
+    "static/media/scene4.9736162a.jpg": "/jonathandpotter.github.io/wheres_waldo/static/media/scene4.9736162a.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7f02daaf.js",
+    "static/js/2.7e80f5c4.chunk.js",
+    "static/css/main.f9cf56c5.chunk.css",
+    "static/js/main.3f9f8bfd.chunk.js"
+  ]
+}
