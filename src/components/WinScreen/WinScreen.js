@@ -13,6 +13,7 @@ const WinScreen = ({
   inputValue,
   popClose,
   topScores,
+  currentScoreId,
 }) => {
   let toRender;
 
@@ -34,14 +35,27 @@ const WinScreen = ({
       return a.time - b.time;
     });
     const listItems = sortedScores.map((score, i) => {
-      if (i < 20) {
+      if (i < 10) {
         return (
-          <li className="score" key={score.id}>
+          <li
+            className="score"
+            key={score.id}
+            style={
+              currentScoreId === score.id
+                ? { color: "red" }
+                : { color: "black" }
+            }
+          >
             {parseInt(i) + 1}. {score.player}{" "}
-            <Timer message="Time" currentTime={score.time} className="topscore-timer"></Timer>
+            <Timer
+              message="Time"
+              currentTime={score.time}
+              className="top-score"
+            ></Timer>
           </li>
         );
       }
+      return null;
     });
     toRender = (
       <div className="container">

@@ -6,9 +6,7 @@ import ChooseScreen from "./components/ChooseScreen/ChooseScreen";
 import WinScreen from "./components/WinScreen/WinScreen";
 import { pictures } from "./pictureArrays.js";
 import React, { Component } from "react";
-// import db from "./firebase.js";
-import firebase from "firebase";
-import "firebase/firestore";
+import db from "./firebase.js";
 
 import {
   BrowserRouter as Router,
@@ -16,18 +14,6 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-
-firebase.initializeApp({
-  apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_APP_ID,
-  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
-});
-
-const db = firebase.firestore();
 
 const initialState = {
   highScores: [],
@@ -37,6 +23,7 @@ const initialState = {
   inputValue: "",
   popClose: false,
   topScores: [],
+  currentScoreId: null,
 };
 
 class App extends Component {
@@ -76,29 +63,37 @@ class App extends Component {
   }
   handleSubmit(event) {
     event.preventDefault();
-    const listItems = [];
+    const targetCollection = "topScores" + this.state.choice.toString();
 
-    db.collection("topScores")
+    db.collection(targetCollection)
       .add({
         player: this.state.inputValue,
         time: this.state.currentTime,
       })
       .then((docRef) => {
-        console.log("Document written with ID: ", docRef.id);
+        this.setState({ currentScoreId: docRef.id });
       })
       .catch((error) => {
         console.error("Error adding document: ", error);
       });
-    db.collection("topScores")
+
+    db.collection(targetCollection)
       .get()
       .then((snapshot) => {
-        const documents = snapshot.docs.map((doc) => doc.data());
-        documents.forEach((doc, i) => {
-          this.setState({topScores: [...this.state.topScores, {id: doc.documentId, player: doc.player, time: doc.time}]})
-        })
+        const collection = snapshot.docs.map((doc) => {
+          return { id: doc.id, data: doc.data() };
+        });
+        collection.forEach((doc) => {
+          this.setState({
+            topScores: [
+              ...this.state.topScores,
+              { id: doc.id, player: doc.data.player, time: doc.data.time },
+            ],
+          });
+        });
       });
 
-    this.setState({ popClose: true});
+    this.setState({ popClose: true });
   }
 
   handleChange(event) {
@@ -106,8 +101,15 @@ class App extends Component {
   }
 
   render() {
-    const { currentTime, choice, found, inputValue, popClose, topScores } =
-      this.state;
+    const {
+      currentTime,
+      choice,
+      found,
+      inputValue,
+      popClose,
+      topScores,
+      currentScoreId,
+    } = this.state;
     return (
       <div className="App">
         <Header
@@ -148,6 +150,7 @@ class App extends Component {
                 inputValue={inputValue}
                 popClose={popClose}
                 topScores={topScores}
+                currentScoreId={currentScoreId}
               />
               {choice === null ? <Redirect to="/" /> : null}
             </Route>
